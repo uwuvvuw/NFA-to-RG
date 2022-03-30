@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory of Computation (TIC2151)</title>
+    <link rel="stylesheet" href = "main.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script
+      src="https://unpkg.com/viz.js@1.8.1/viz.js"
+      type="javascript/worker"
+    ></script>
+    <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
+</head>
+<body style = "background-color: rgb(255, 255, 245);">
+    <div class="tab">
+        <button class="pages" id="autoOpen" onclick="clickPage(event, 'Main')" style="font-size: larger; font-weight: bold;" >Home</button>
+        <button class="pages" onclick="clickPage(event, 'RgToNfa')" style="font-size: larger; font-weight: bold;">RG → NFA</button>
+        <button class="pages" onclick="clickPage(event, 'NfaToRg')" style="font-size: larger; font-weight: bold;">NFA → RG</button>
+        <button class="pages" onclick="clickPage(event, 'HelpDocs')" style="font-size: larger; font-weight: bold;">Help + Docs</button>
+    </div>
+    
+<div id = "Main" class="windowPage">
+        <h2>Theory Of Computation (T1C2151)</h2>
+        <table class = "center">
+            <tr>
+                <th>Name</th>
+                <th>Student ID</th>
+                <th>Participation (%)</th>
+            </tr>
+            <tr>
+                <td>Fatin Natasha Binti Zahari</td>
+                <td>1201301421</td>
+                <th>25%</th>
+            </tr>
+            <tr>
+                <td>Wong Chun Gee</td>
+                <td>1201301759</td>
+                <th>25%</th>
+            </tr>
+            <tr>
+                <td>Chuah JieYi</td>
+                <td>1201302035</td>
+                <th>25%</th>
+            </tr>
+            <tr>
+                <td>Ng Zhen Xiong</td>
+                <td>1181302692</td>
+                <th>25%</th>
+            </tr>
+            <br>
+          </table>
+          <br>
+          <br>
+          <div id="img">
+          <a href=# onclick = 'font(1)'><img src="images/1.jpg" alt="tasha"/></a>
+          <a href=# onclick = 'font(2)'><img src="images/2.jpeg" alt="cg"/></a>
+          <a href=# onclick = 'font(3)'><img src="images/3.jpeg" alt="jy"/></a>
+          <a href=# onclick = 'font(4)'><img src="images/4.jpeg" alt="zx"/></a>
+          <br>
+          <br>
+          <div id="nameOutput" style="font-size: larger; font-weight: bold;"></div>
+          </div>
+
+    </div>
+    <div id="NfaToRg" class="windowPage">
+        <h2>NFA to RG</h2>
+        <table>
+            <tr>
+                <td class="left">&sum;</td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:lowercase;" oninput="document.getElementById('000').innerHTML=this.value" ></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:lowercase;" oninput="document.getElementById('001').innerHTML=this.value" ></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:lowercase;" oninput="document.getElementById('002').innerHTML=this.value"></td>
+                <td>ε</td>
+            </tr>
+
+            <tr>
+                <td class="left" id = "qTable">Q</td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" oninput="document.getElementById('1').innerHTML=this.value" ></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" oninput="document.getElementById('2').innerHTML=this.value"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" oninput="document.getElementById('3').innerHTML=this.value"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" oninput="document.getElementById('4').innerHTML=this.value"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" oninput="document.getElementById('5').innerHTML= this.value"></td>
+            </tr>
+
+            <tr>
+                <td>START</td>
+                <td><input pattern= /^[A-Za-z]+$/{1} class = "startClass" type="text" style="width: 20px; text-transform:uppercase;" id="startState"></td>
+            </tr>
+
+            <tr>
+
+                <td class="left">FINAL</td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" id = "finalState" oninput="checkFinal('finalState')"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" id = "finalState1" oninput="checkFinal('finalState1')"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" id = "finalState2" oninput="checkFinal('finalState2')"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" id = "finalState3" oninput="checkFinal('finalState3')"></td>
+                <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" id = "finalState4" oninput="checkFinal('finalState4')"></td>
+            </tr>
+
+            </tr>
+        </table>
+        <br>
+        <input type="button" value="Show the Transition Table" onclick="showTable('transitionTable'); showTable('table');"/> 
+
+            <table id="transitionTable" cellpadding="20%" style= "display:none;">
+                <caption style="font-weight: bold; font-size: 20px;">Transition Table (Empty Boxes = ∅) </caption>
+                <br>
+                <br>
+                <tr>
+                    <th class="right"></th>
+                    <th class="right" id='000'> </th>
+                    <th class="right" id='001'>  </th>
+                    <th class="right" id='002'> </th>
+                    <th class="right" id='003'> &epsilon; </th>
+                  
+                </tr>
+                <tr>
+                    <th class="right" id='1'></th>
+                    <td class="rightChild"><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;" id="100" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id="101"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;" class="cap"id="102" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id="103" ></td>
+        
+                </tr>
+                <tr>
+                    <th class="right" id="2"></th>
+                    <td class="rightChild"><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px;" id="200"></td>
+                    <td><input pattern= /^[A-Za-z]+$/ {1} type="text" style="width: 20px ; text-transform:uppercase;"id="201"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;" id="202" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id="203" ></td>
+
+                </tr>
+                <tr>
+                    <th class="right" id="3"></th>
+                    <td class="rightChild"><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px;" id="300" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;"id="301"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;" id="302" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;" id="303" ></td>
+   
+                </tr>
+                <tr>
+                    <th class="right" id="4"></th>
+                    <td class="rightChild"><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id= "400"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;" id="401"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id="402" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1} type="text"style="width: 20px; text-transform:uppercase;"id="403" ></td>
+
+                </tr>
+
+                <tr>
+                    <th class="right" id="5"></th>
+                    <td class="rightChild"><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id= "500"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1} type="text" style="width: 20px; text-transform:uppercase;"id="501"></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id="502" ></td>
+                    <td><input pattern= /^[A-Za-z]+$/{1}  type="text" style="width: 20px; text-transform:uppercase;"id="503" ></td>
+
+                </tr>
+
+            </table>
+            <br>
+            <input type="button" id="table" style="display: none;" value="NFA To Regular Grammar" onclick="newTable('transitionTable'); showReg(); showTable('checkTable'); showTable('check'); "/> <br>
+            <h1 id = "regularGrammar" style= "display: none; border: 5px solid rgb(167, 163, 120);"></h1> 
+
+            <table id ="checkTable" cellpadding="20%" style= "display:none;">
+            <caption style="font-weight: bold; font-size: 20px;">Check Strings (Input)</caption>
+            <tr>
+                <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="00"></td>
+                <td id="01" width="55px"></td>
+            </tr>
+            <tr>
+                <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="02"></td>
+                <td id="03" width="55px"></td>
+            </tr>
+            <tr>
+                <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="04"></td>
+                <td id="05" width="55px"></td>
+            </tr>
+            <tr>
+                <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="06"></td>
+                <td id="07" width="55px"></td>
+            </tr>
+            <tr>
+                <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="08"></td>
+                <td id="09" width="55px"></td>
+            </tr>
+            </table>
+              
+            
+            <input type="button" id="check" style="display: none;" value="Check Strings" onclick="checkFinalString();"/>
+    </div>
+
+    <div id="RgToNfa" class="windowPage">
+        <table id="table1"; cellspacing="10px" cellpadding="10%">
+            <h2>RG to NFA</h2>
+            <tr>
+                <th></th>
+                <th> Variable </th>
+                <th> a </th>
+                <th> b </th>
+                <th> c </th>
+                <th> &epsilon;  </th>
+                <th> &epsilon;  </th>
+                <th> Input 1 for Final State </th>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="chk"/></th>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" style="width: 20px;" required>      &rarr;</td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="a" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="b" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="c" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="e" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="" style="width: 20px;"></td>
+                <td style="width: 10px;"><input pattern=/^[A-Za-z]+$/{1} type="text" name="" ></td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="chk"/></th>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" style="width: 20px;" required>       &rarr;</td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="a" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="b" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="c" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="e" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="" style="width: 20px;"></td>
+                <td style="width: 10px;"><input pattern=/^[A-Za-z]+$/{1} type="text" name="" ></td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="chk"/></th>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" style="width: 20px;" required>       &rarr;</td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="a" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="b" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="c" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="e" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="" style="width: 20px;"></td>
+                <td style="width: 10px;"><input pattern=/^[A-Za-z]+$/{1} type="text" name="" ></td>
+            </tr>
+            <tr>
+                <th><input type="checkbox" name="chk"/></th>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" style="width: 20px;" required>      &rarr;</td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="a" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="b" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="c" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="e" style="width: 20px;"></td>
+                <td><input pattern=/^[A-Za-z]+$/{1} type="text" name="" style="width: 20px;"></td>
+                <td style="width: 10px;"><input pattern=/^[A-Za-z]+$/{1} type="text" name="" ></td>
+            </tr>
+
+        </table>
+        <br>
+        <input type="button" value="Add Row" onclick="addRow('table1')" class="buttonAdd"/>
+        <input type="button" value="Delete Row" onclick="deleteRow('table1')"/>
+        <input type="button" value="Submit" onclick="submit('rg2nfa_transition','rg2nfa_transitionTable')"/>
+        <br>
+        <br>
+
+        <table id="rg2nfa_transition" style= "display:block;">
+            <tr>
+                <td class="left">&sum;</td>
+                <td id="transitionSum"></td>
+            </tr>
+
+            <tr>
+                <td class="left" id = "qTable">Q</td>
+                <td id="transitionQ"></td>
+             </tr>
+
+            <tr>
+                <td>START</td>
+                <td id="transitionStart"></td>
+            </tr>
+
+            <tr>
+                <td class="left">FINAL</td>
+                <td id="transitionFinal"></td>
+             </tr>
+
+            </tr>
+        </table>
+    
+        <div id="rg2nfa_transitionTable" style="margin-top:25px"></div>
+        <br>
+        <div id="nfaWithoutE"><input type="button" value="Show Transition without Epsilon" onclick="generateNfaWithoutE('nfaWithoutE')" style="display:none;" id="nfa2dfaBtn"/></div>
+        <br>
+        
+        <div class="nfa"><input type="button" value="Draw NFA" onclick="drawNfa()" style="display:none;" id="nfaBtn"/></div>
+        <br>
+        <div cellpadding="20%"  >
+            <table  id ="stringTable" style= "display:block;">
+                <caption style="font-weight: bold; font-size: 20px;">Check Strings (Input)</caption>
+                <br>
+                <tr>
+                    <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="1stString"></td>
+                    <td id="1stOutput" width="55px"></td>
+                </tr>
+                <tr>
+                    <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="2ndString"></td>
+                    <td id="2ndOutput" width="55px"></td>
+                </tr>
+                <tr>
+                    <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="3rdString"></td>
+                    <td id="3rdOutput" width="55px"></td>
+                </tr>
+                <tr>
+                    <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="4thString"></td>
+                    <td id="4thOutput" width="55px"></td>
+                </tr>
+                <tr>
+                    <td><input pattern= /^[A-Za-z]+$/ type="text" style="width: 85px;" id="5thString"></td>
+                    <td id="5thOutput" width="55px"></td>
+                </tr>
+                </table>
+                <input type="button" id="checkStringBtn" style="display: block;" value="Check Strings" onclick="submitString('stringTable');"/>
+        </div>
+    </div>
+    <div id = "HelpDocs" class = "windowPage">
+            <h2 style="font-family:'Times New Roman', Times, serif; size: 50px;">This page is a user's guide on how to use our web application.</h2>
+            <h4 style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: lighter;"> Here, we have shown the steps on how to input variables, alphabets, the start and final states as well as what does each button
+                    and each table means in the RG → NFA tab and NFA → RG tab. </h4>
+            <iframe style="position: absolute; height: 100%; width: 100%; border: none"  src="https://docs.google.com/document/d/e/2PACX-1vQ7VfKVYiZVhZH8CKT49CN0n4r5JE7HRLy9dwVIOdJSCLtZCm9GGr4flT_lNJOx5hIFm81i6jSjN67b/pub?embedded=true"></iframe>
+            </div>
+
+
+    <script src="main.js"></script>
+</body>
+</html>
